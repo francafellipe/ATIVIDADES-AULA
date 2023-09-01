@@ -1,0 +1,52 @@
+#algoritmo 1°: Faça uma função que recebe por parâmetro o tempo de duração de uma fábrica expressa em segundos e retorna também por parâmetro esse tempo em horas, minutos e segundos
+
+'''def calcular_tempo():
+    tempo = int(input("Qual o tempo de duração da fabrica em segundos ?"))
+    h= int(tempo/3600)
+    m= int(tempo/60)
+    segundos = (h - m) 
+    return f"{h} : {m} : {segundos}"
+
+
+print(calcular_tempo())'''
+'''
+def calcular_tempo(seg):
+    horas = seg // 3600
+
+    seg -= horas * 3600
+
+    min = seg//60
+
+    seg -= min * 60
+
+    return f"{horas} horas : {min} minutos : {seg}"
+
+tempo = int(input("Digite o tempo total de segundos : "))
+
+print(calcular_tempo(tempo))'''
+
+
+#var 
+'''def calcular_idade(total_dias):
+    dias_em_anos = idade_anos*360
+    dias_em_meses = idade_meses * 30 
+    total_dias = dias_em_anos+dias_em_meses+idade_dias
+    print ("A pessoa viveu {total_dias}")
+
+
+idade_anos = (int(input('Quantidade de anos :')))
+idade_meses = (int(input('Quantidade de meses :')))
+idade_dias = (int(input('Quantidade de dias :')))'''
+
+
+idade_anos = (int(input('Quantidade de anos :')))
+idade_meses = (int(input('Quantidade de meses :')))
+idade_dias = (int(input('Quantidade de dias :')))
+dias_em_anos = idade_anos*360
+dias_em_meses = idade_meses * 30 
+total_dias = dias_em_anos+dias_em_meses+idade_dias
+print (f"A pessoa viveu {total_dias} dias .  ")
+
+#inicio
+
+#fimalgoritmo 
