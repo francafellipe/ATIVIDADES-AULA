@@ -70,48 +70,45 @@ while True:
         
 # comissao tecnica , deve conter o tecnico , o auxiliar e o preparador
     elif escolha == 3:
+        
         while True:
             escolha2 = int(input('1 - Cadastrar técnico ?\n'
                                 '2 - Cadastrar auxiliar ?\n'
                                 '3 - Cadastrar preparador ?\n'
-                                '4 - Dar coletiva ?\n'
                                 '0 - Finalizar Cadastro da comissão.'))
+
             if escolha2 == 1:
                 nometecnico = input('Qual o nome do técnico ?')
                 timetreinador = input('Qual o time ele treina ?')
                 esquemapreferidotec = input('Qual esquema tatico preferido ?')
                 tec = Tecnico (f"{nometecnico}",f"{timetreinador}",f'{esquemapreferidotec}')
+                coletiva = input("Deseja dar coletiva ? s/n")
+                if coletiva == 's' :
+                    print(tec.dar_coletiva())
 
-            if escolha == 2:
+            if escolha2 == 2:
                 nomeauxiliar = input('Qual o nome do Auxiliar ?')
                 timeaux = input('Qual time o auxiliar treina ?')
-                esquemapreferidoaux = int(input('Qual esquema tatico preferido ?'))
+                esquemapreferidoaux = (input('Qual esquema tatico preferido ?'))
                 aux = Auxiliar (f"{nomeauxiliar}",f"{timeaux}",f'{esquemapreferidoaux}')
+                coletiva2 = input("Deseja dar coletiva ? s/n")
+                if coletiva2 == 's' :
+                    print(aux.dar_coletiva())
 
-            if escolha == 3 :
+            if escolha2 == 3 :
                 nomepreparador = input('Qual o nome do preparador ?')
                 timepreparador = input('Qual time o preparador trabalha')
                 partepreparo = input('Qual parte do time é preparado ? \n'
                                     'Jogadores de linha ?\n'
                                     'Goleiros ')
                 prep = Preparador(f'{nomepreparador}',f'{timepreparador}',f'{partepreparo}')
+                coletiva3 = input("Deseja dar coletiva ? s/n")
+                if coletiva3== 's' :
+                    print(prep.dar_coletiva())
 
-            if escolha == 4:
-                escolha3 = int(input('Quem irá dar a entrevista coletiva ?\n'
-                                    '1 - Treinador ?\n'
-                                    '2 - Auxiliar ? \n'
-                                    '3 - Preparador ?'))
-                if escolha3 == 1:
-                    print(Tecnico.dar_coletiva())
-                elif escolha3 == 2:
-                    print(Auxiliar.dar_coletiva())
-                elif escolha == 3:
-                    print(Preparador.dar_coletiva())
+            
 
-                else:
-                    print('Opção invalida ')
-
-            if escolha == 0:
+            if escolha2 == 0:
                 break
             
             
