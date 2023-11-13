@@ -1,21 +1,20 @@
-# SISTEMA FIFA DE CADASTRO
+import tkinter as tk
+from tkinter import simpledialog
 
-#sistema deve ser possivel cadastrar times jogadores e comissao tecnica
-
-class Times :
-    def __init__(self,nometime,cidadetime,mascotetime):
+class Times:
+    def __init__(self, nometime, cidadetime, mascotetime):
         self.nometime = nometime
         self.cidadetime = cidadetime
         self.mascotetime = mascotetime
 
 class Jogadores:
-    def __init__(self,nomejogador,numero,nometimejoga):
+    def __init__(self, nomejogador, numero, nometimejoga):
         self.nomejogador = nomejogador
         self.numerocamisa = numero
         self.nometimejoga = nometimejoga
 
 class Comissao:
-    def __init__(self,nome,time):
+    def __init__(self, nome, time):
         self.nome = nome
         self.time = time
 
@@ -24,93 +23,113 @@ class Tecnico(Comissao):
         super().__init__(nome, time)
         self.esquemat = esquemat
 
-    def dar_coletiva(self):
-        return f'O técnico está dando uma coletiva de imprensa'
-
 
 class Auxiliar(Comissao):
     def __init__(self, nome, time, esquematx):
         super().__init__(nome, time)
         self.esquematx = esquematx
-    
 
-    def dar_coletiva(self):
-        return ' O auxiliar está dando uma coletiva de imprensa'
-    
 
 class Preparador(Comissao):
-    def __init__(self, nome, time,parte):
+    def __init__(self, nome, time, parte):
         super().__init__(nome, time)
         self.parte = parte
 
-    def dar_coletiva(self):
-        return 'O preparador está dando uma coletiva de imprensa '
 
-#menu de escolha de cadastro de jogador time ou comissao tecnica
+def cadastrar_time():
+    nometime = simpledialog.askstring("Cadastrar Time", "Digite o nome do time:")
+    cidadetime = simpledialog.askstring("Cadastrar Time", "O time é de qual cidade?")
+    mascotetime = simpledialog.askstring("Cadastrar Time", "Qual o mascote do time?")
+    time = Times(nometime, cidadetime, mascotetime)
 
-# cadastro do time deve ter nome, cidade do time , e o mascote
-while True:
-    escolha = int(input('Bem vindo ao menu fifa ! \n'
-                    '1 - Cadastrar novo time .\n'
-                    '2 - Cadastrar novo jogador .\n'
-                    '3 - Cadastrar comissão técnica\n'
-                    '0 - Finalizar menu '))
-    if escolha == 1:
-        nometime = input("Digite o nome do time :")
-        cidadetime = input("O time é de qual cidade ?")
-        mascotetime = input("Qual o mascote do time ? ")
-        times = Times(f"{nometime}",f'{cidadetime}',f'{mascotetime}')
 
-# jogadores deve conter nome , nome do time ao qual atua, e numero da camisa
-    elif escolha == 2:
-        nomejogador = input('Qual nome do jogador ? ')
-        nometimejoga = input('Qual o time que o jogador atua ? ')
-        numerocamisa = input('Qual numero do jogador ?')
-        nomejogador1 = Jogadores(f"{nomejogador}",{numerocamisa},f'{nometimejoga}')
+def cadastrar_jogador():
+
+    nomejogador = simpledialog.askstring("Cadastrar Jogador", "Qual é o nome do jogador?")
+    numerocamisa = simpledialog.askinteger("Cadastrar Jogador", "Qual é o número da camisa?")
+    nometimejoga = simpledialog.askstring("Cadastrar Jogador", "Em qual time o jogador atua?")
+    jogador = Jogadores(nomejogador, numerocamisa, nometimejoga)
+def coletiva_tecnico():
+    janela = tk.Toplevel()
+    janela.title("Coletiva do Técnico")
+    label = tk.Label(janela, text="O técnico está dando coletiva")
+    label.pack()
+
+def coletiva_auxiliar():
+    janela = tk.Toplevel()
+    janela.title("Coletiva do Auxiliar")
+    label = tk.Label(janela, text="O auxiliar está dando coletiva")
+    label.pack()
+
+def coletiva_preparador():
+    janela = tk.Toplevel()
+    janela.title("Coletiva do Preparador")
+    label = tk.Label(janela, text="O preparador está dando coletiva")
+    label.pack()
+def dar_coletiva():
+    while True:
+        colet = simpledialog.askinteger('Coletiva de imprensa ','1 - Convidar técnico \n 2- Convidar auxiliar  \n3 - Convidar preparador \n4- Fim da coletiva ')
+        if colet == 1:
+            coletiva_tecnico()
+
+        elif colet == 2:
+            coletiva_auxiliar()
+
+        elif colet == 3 :
+            coletiva_preparador()
+
+        elif colet == 4:
+            break
+
+
+def cadastrar_comissao():
+    while True:
+        escolha2 = simpledialog.askinteger("Cadastrar Comissão", "1 - Cadastrar técnico\n2 - Cadastrar auxiliar\n3 - Cadastrar preparador\n0 - Finalizar Cadastro da comissão")
         
-# comissao tecnica , deve conter o tecnico , o auxiliar e o preparador
-    elif escolha == 3:
+        if escolha2 == 1:
+            nometecnico = simpledialog.askstring("Cadastrar Técnico", "Qual é o nome do técnico?")
+            timetreinador = simpledialog.askstring("Cadastrar Técnico", "Qual time ele treina?")
+            esquemapreferidotec = simpledialog.askstring("Cadastrar Técnico", "Qual é o esquema tático preferido?")
+            tec = Tecnico(nometecnico, timetreinador, esquemapreferidotec)
         
-        while True:
-            escolha2 = int(input('1 - Cadastrar técnico ?\n'
-                                '2 - Cadastrar auxiliar ?\n'
-                                '3 - Cadastrar preparador ?\n'
-                                '0 - Finalizar Cadastro da comissão.'))
 
-            if escolha2 == 1:
-                nometecnico = input('Qual o nome do técnico ?')
-                timetreinador = input('Qual o time ele treina ?')
-                esquemapreferidotec = input('Qual esquema tatico preferido ?')
-                tec = Tecnico (f"{nometecnico}",f"{timetreinador}",f'{esquemapreferidotec}')
-                coletiva = input("Deseja dar coletiva ? s/n")
-                if coletiva == 's' :
-                    print(tec.dar_coletiva())
-
-            if escolha2 == 2:
-                nomeauxiliar = input('Qual o nome do Auxiliar ?')
-                timeaux = input('Qual time o auxiliar treina ?')
-                esquemapreferidoaux = (input('Qual esquema tatico preferido ?'))
-                aux = Auxiliar (f"{nomeauxiliar}",f"{timeaux}",f'{esquemapreferidoaux}')
-                coletiva2 = input("Deseja dar coletiva ? s/n")
-                if coletiva2 == 's' :
-                    print(aux.dar_coletiva())
-
-            if escolha2 == 3 :
-                nomepreparador = input('Qual o nome do preparador ?')
-                timepreparador = input('Qual time o preparador trabalha')
-                partepreparo = input('Qual parte do time é preparado ? \n'
-                                    'Jogadores de linha ?\n'
-                                    'Goleiros ')
-                prep = Preparador(f'{nomepreparador}',f'{timepreparador}',f'{partepreparo}')
-                coletiva3 = input("Deseja dar coletiva ? s/n")
-                if coletiva3== 's' :
-                    print(prep.dar_coletiva())
-
+        if escolha2 == 2:
+            nomeauxiliar = simpledialog.askstring("Cadastrar Auxiliar", "Qual é o nome do Auxiliar?")
+            timeaux = simpledialog.askstring("Cadastrar Auxiliar", "Qual time o auxiliar treina?")
+            esquemapreferidoaux = simpledialog.askstring("Cadastrar Auxiliar", "Qual é o esquema tático preferido?")
+            aux = Auxiliar(nomeauxiliar, timeaux, esquemapreferidoaux)
             
 
-            if escolha2 == 0:
-                break
+        if escolha2 == 3:
+            nomepreparador = simpledialog.askstring("Cadastrar Preparador", "Qual é o nome do preparador?")
+            timepreparador = simpledialog.askstring("Cadastrar Preparador", "Qual time o preparador trabalha?")
+            partepreparo = simpledialog.askstring("Cadastrar Preparador", "Qual parte do time é preparada?")
+            prep = Preparador(nomepreparador, timepreparador, partepreparo)
             
-            
-    elif escolha == 0:
-        break
+
+        if escolha2 == 0:
+            break
+
+def menu():
+    root = tk.Tk()
+    root.title("Menu FIFA")
+    root.geometry('500x400')
+
+    button_cadastrar_time = tk.Button(root, text="Cadastrar novo time", command=cadastrar_time)
+    button_cadastrar_time.pack()
+
+    button_cadastrar_jogador = tk.Button(root, text="Cadastrar novo jogador", command=cadastrar_jogador)
+    button_cadastrar_jogador.pack()
+
+    button_cadastrar_comissao = tk.Button(root, text="Cadastrar comissão técnica", command=cadastrar_comissao)
+    button_cadastrar_comissao.pack()
+
+    button_darcoletiva = tk.Button(root, text= 'Coletiva de imprensa', command= dar_coletiva)
+    button_darcoletiva.pack()
+
+    button_sair = tk.Button(root, text="Finalizar menu", command=root.destroy)
+    button_sair.pack()
+
+    root.mainloop()
+
+menu()
