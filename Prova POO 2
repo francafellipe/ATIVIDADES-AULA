@@ -1,0 +1,45 @@
+class Livro:
+    def __init__(self, titulo, autor, editora):
+        self.titulo = titulo
+        self.autor = autor
+        self.editora = editora
+
+    def exibir_detalhes(self):
+        print(f"Título: {self.titulo}")
+        print(f"Autor: {self.autor}")
+        print(f"Editora: {self.editora}")
+
+
+class Romance(Livro):
+    def __init__(self, titulo, autor, editora, numero_paginas, faixa_etaria):
+        super().__init__(titulo, autor, editora)
+        self.numero_paginas = numero_paginas
+        self.faixa_etaria = faixa_etaria
+
+    def exibir_detalhes(self):
+        super().exibir_detalhes()
+        print(f"Número de Páginas: {self.numero_paginas}")
+        print(f"Faixa Etária Recomendada: {self.faixa_etaria}")
+
+
+class Biografia(Livro):
+    def __init__(self, titulo, autor, editora, ano_publicacao, pessoa_biografada):
+        super().__init__(titulo, autor, editora)
+        self.ano_publicacao = ano_publicacao
+        self.pessoa_biografada = pessoa_biografada
+
+    def exibir_detalhes(self):
+        super().exibir_detalhes()
+        print(f"Ano de Publicação: {self.ano_publicacao}")
+        print(f"Pessoa Biografada: {self.pessoa_biografada}")
+
+
+# criando estancias 
+romance = Romance("Fellipe na programacao Orientada a Objetos ", "Fellipe lima", "Editora Infinity School", 850, "17+")
+biografia = Biografia("Getulio", "Professor ", "Editora Inifinity School", 2023, "Getulio Professor")
+
+print("Detalhes do Romance:")
+romance.exibir_detalhes()
+
+print("\nDetalhes da Biografia:")
+biografia.exibir_detalhes()
